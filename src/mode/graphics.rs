@@ -1,4 +1,4 @@
-//! Buffered display module for use with the embedded_graphics crate
+//! Buffered display module for use with the [embedded_graphics] crate
 
 use hal::blocking::delay::DelayMs;
 use hal::digital::OutputPin;
@@ -67,7 +67,8 @@ where
         // Ensure the display buffer is at the origin of the display before we send the full frame
         // to prevent accidental offsets
         let (display_width, display_height) = display_size.dimensions();
-        self.properties.set_draw_area((0, display_width), (0, display_height))?;
+        self.properties
+            .set_draw_area((0, display_width), (0, display_height))?;
 
         match display_size {
             DisplaySize::Display128x64 => self.properties.draw(&self.buffer),
@@ -141,9 +142,9 @@ where
 #[cfg(feature = "graphics")]
 extern crate embedded_graphics;
 #[cfg(feature = "graphics")]
-use self::embedded_graphics::drawable;
-#[cfg(feature = "graphics")]
 use self::embedded_graphics::Drawing;
+#[cfg(feature = "graphics")]
+use self::embedded_graphics::drawable;
 
 #[cfg(feature = "graphics")]
 impl<DI> Drawing for GraphicsMode<DI>
